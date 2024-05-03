@@ -28,11 +28,8 @@ namespace Entities
         [Display(Name = "Kart Numarası"), StringLength(16), Required]
         public string CardNo { get; set; }
 
-        [Display(Name = "Gönderildi mi?")]
-        public bool IsShipped { get; set; }
-
-        // Durum alanı
-        [Display(Name = "Durum")]
-        public string Status { get; set; }
+        
+        }
     }
-}
+
+

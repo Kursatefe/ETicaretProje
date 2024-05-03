@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Sepetim";
 }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <h1>Sepetim</h1>
 <div id="cart" class="container">
@@ -27,7 +28,7 @@
                                     <img src="/Images/@item.Product.Image" alt="" class="img-thumbnail" style="max-height: 100px; max-width: 100px;" />
                                 </td>
                                 <td>
-                                    <a href="/Products/Detail/@item.Product.Id">
+                                    <a href="/Products/Detail/@item.Product.Id" class="text-decoration-none">
                                         @Html.Raw(item.Product.Name)
                                     </a>
                                 </td>
@@ -38,7 +39,7 @@
                                         <input type="hidden" name="ProductId" value="@item.Product.Id" />
                                         <button type="submit" class="btn btn-danger">
                                             Sil
-                                            <i class="fa fa-times fa-fw"></i>
+                                            <i class="fa fa-times"></i>
                                         </button>
                                     </form>
                                 </td>
@@ -74,57 +75,60 @@
 <div class="container">
     <div class="card">
         <div class="card-body">
-            <button type="button" id="confirmCartButton" class="btn btn-success" style="@(Model.Cart.Products.Any() ? "display:block;" : "display:none;")">Sepeti Onayla</button>
+            <button type="button" id="confirmCartButton" class="btn btn-success" style="@(Model.Cart.Products.Any() ? "display:block; background-color:wheat; border-color:wheat;" : "display:none;")">Sepeti Onayla</button>
         </div>
+
+
     </div>
 </div>
 @if (Model.Cart.Products.Any())
 {
     <div class="container">
         <div class="card">
-            <div class="card-body">
-                <h3 class="card-title" style="color: #4CAF50; margin-bottom: 20px;">Bilgilerinizi Giriniz</h3>
+            <div class="card-body" style="background-color:dimgrey;">
+                <h3 class="card-title" style="color: wheat; margin-bottom: 20px;">Bilgilerinizi Giriniz</h3>
                 <form asp-action="OrderResult" id="orderForm" style="display:none;">
                     <div asp-validation-summary="All" class="text-danger"></div>
                     <input type="hidden" id="orderDetailInput" name="Order.OrderDetail" />
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <label asp-for="Order.Name" class="form-label" style="color: #4CAF50;">Ad</label>
+                            <label asp-for="Order.Name" class="form-label" style="color: wheat;">Ad <i class="fas fa-user"></i></label>
                             <input asp-for="Order.Name" id="Order_Name" type="text" class="form-control" required>
                             <span asp-validation-for="Order.Name" class="text-danger"></span>
                         </div>
                         <div class="col-md-6">
-                            <label asp-for="Order.Surname" class="form-label" style="color: #4CAF50;">Soyad</label>
+                            <label asp-for="Order.Surname" class="form-label" style="color: wheat;">Soyad <i class="fas fa-user"></i></label>
                             <input asp-for="Order.Surname" id="Order_Surname" type="text" class="form-control" required>
                             <span asp-validation-for="Order.Surname" class="text-danger"></span>
                         </div>
                         <div class="col-md-6">
-                            <label asp-for="Order.Phone" class="form-label" style="color: #4CAF50;">Telefon</label>
+                            <label asp-for="Order.Phone" class="form-label" style="color: wheat;">Telefon <i class="fas fa-phone-alt"></i></label>
                             <input asp-for="Order.Phone" id="Order_Phone" type="tel" class="form-control" pattern="[0-9]{10}" maxlength="10" required>
                             <span asp-validation-for="Order.Phone" class="text-danger"></span>
                         </div>
                         <div class="col-md-6">
-                            <label asp-for="Order.Email" class="form-label" style="color: #4CAF50;">E-Mail</label>
+                            <label asp-for="Order.Email" class="form-label" style="color: wheat;">E-Mail <i class="fas fa-envelope"></i></label>
                             <input asp-for="Order.Email" id="Order_Email" type="email" class="form-control" required>
                             <span asp-validation-for="Order.Email" class="text-danger"></span>
                         </div>
                         <div class="col-12">
-                            <label asp-for="Order.Address" class="form-label" style="color: #4CAF50;">Adres</label>
+                            <label asp-for="Order.Address" class="form-label" style="color: wheat;">Adres <i class="fas fa-map-marker-alt"></i></label>
                             <input asp-for="Order.Address" id="Order_Address" type="text" class="form-control" required>
                             <span asp-validation-for="Order.Address" class="text-danger"></span>
                         </div>
                         <div class="col-md-6">
-                            <label asp-for="Order.CardNo" class="form-label" style="color: #4CAF50;">Kart Numarası</label>
+                            <label asp-for="Order.CardNo" class="form-label" style="color:wheat;">Kart Numarası <i class="fas fa-credit-card"></i></label>
                             <input asp-for="Order.CardNo" id="Order_CardNo" class="form-control" type="text" pattern="[0-9]{16}" maxlength="16" required>
                             <span asp-validation-for="Order.CardNo" class="text-danger"></span>
                         </div>
                         <div class="col-md-6">
-                            <label asp-for="Order.CVV" class="form-label" style="color: #4CAF50;">CVV</label>
+                            <label asp-for="Order.CVV" class="form-label" style="color: wheat;">CVV <i class="fas fa-lock"></i></label>
                             <input asp-for="Order.CVV" id="Order_CVV" class="form-control" type="text" pattern="[0-9]{3}" maxlength="3" required>
-                            <span asp-validation-for="Order.CVV" class="text-danger"></span>
+                            <span asp-validation-for="Order.CVV" class="text-danger"></span> CVV numarası 3 rakamdan oluşmalıdır.
                         </div>
+
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary" style="background-color: #4CAF50; border-color: #4CAF50;">Siparişi Tamamla</button>
+                            <button type="submit" class="btn btn-primary" style="background-color: wheat; border-color: #4CAF50;">Siparişi Tamamla</button>
                         </div>
                     </div>
                 </form>
@@ -153,7 +157,7 @@
     @foreach (var item in Model.Cart.Products)
     {
         <text>
-                    var product = {
+                        var product = {
                 ÜrünNumarası: '@item.Product.Id',
                 ÜrünAdı: '@Html.Raw(item.Product.Name)',
                 Fiyat: '@item.Product.Price',

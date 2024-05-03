@@ -61,8 +61,8 @@ namespace ETicaretProje.Areas.Admin.Controllers
                 try
                 {
                     order.CreateDate = DateTime.Now;
-                    order.IsShipped = false;
-                    order.Status = "New";
+                   
+                   
 
                     // Siparişi veritabanına ekleyin
                     _context.Orders.Add(order);
