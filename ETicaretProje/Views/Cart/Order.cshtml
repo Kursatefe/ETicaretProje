@@ -1,0 +1,68 @@
+﻿@model CartViewModel
+
+<div class="container">
+    <h3>Bilgilerinizi Giriniz</h3>
+    <form method="post" asp-action="Index">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label asp-for="Order.Name" class="form-label">Ad</label>
+                <input asp-for="Order.Name" type="text" class="form-control" required>
+                <span asp-validation-for="Order.Name" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Order.Surname" class="form-label">Soyad</label>
+                <input asp-for="Order.Surname" type="text" class="form-control" required>
+                <span asp-validation-for="Order.Surname" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Order.Phone" class="form-label">Telefon</label>
+                <input asp-for="Order.Phone" type="tel" class="form-control" pattern="[0-9]{10}" maxlength="10" required>
+                <span asp-validation-for="Order.Phone" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="Order.Email" class="form-label">E-Mail</label>
+                <input asp-for="Order.Email" type="email" class="form-control" required>
+                <span asp-validation-for="Order.Email" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="Order.Address" class="form-label">Adres</label>
+                <input asp-for="Order.Address" type="text" class="form-control" required>
+                <span asp-validation-for="Order.Address" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Order.CardNo" class="form-label">Kart Numarası</label>
+                <input asp-for="Order.CardNo" class="form-control" type="text" pattern="[0-9]{16}" maxlength="16" required>
+                <span asp-validation-for="Order.CardNo" class="text-danger"></span>
+            </div>
+            <div class="col-md-2">
+                <label asp-for="Order.CVV" class="form-label">CVV</label>
+                <input asp-for="Order.CVV" class="form-control" type="text" pattern="[0-9]{3}" maxlength="3" required>
+                <span asp-validation-for="Order.CVV" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Siparişi Tamamla</button>
+                </div>
+            </div>
+        </div>
+        @* Sepet ürünlerini JSON formatında gizli bir alana ekleyin *@
+        @{
+            var orderDetail = new List<dynamic>();
+            if (Model?.Cart?.Products != null)
+            {
+                foreach (var item in Model.Cart.Products)
+                {
+                    orderDetail.Add(new
+                    {
+                        ÜrünNumarası = item.Product.Id,
+                        ÜrünAdı = item.Product.Name,
+                        Fiyat = item.Product.Price,
+                        Miktar = item.Quantity
+                    });
+                }
+            }
+        }
+        <input type="hidden" id="orderDetailInput" name="Order.OrderDetail" value="@Json.Serialize(orderDetail)" />
+    </form>
+</div>

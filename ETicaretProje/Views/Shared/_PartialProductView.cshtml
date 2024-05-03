@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Product>
+
+@foreach (var item in Model)
+{
+    <div class="col">
+        <a asp-controller="Products" asp-action="Detail" asp-route-id="@item.Id" class="text-decoration-none">
+            <div class="card shadow-sm">
+                <img src="/Images/@item.Image" />
+                <div class="card-body">
+                    <p class="card-text">
+                        @item.Name
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-body-secondary">@item?.Category?.Name</small>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+}

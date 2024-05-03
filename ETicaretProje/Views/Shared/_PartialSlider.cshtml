@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Slide>
+
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+
+    <div class="carousel-inner">
+
+        @foreach (var item in Model)
+        {
+            <div class="carousel-item @(item == Model.First() ? "active" : "")">
+                <img src="/Images/@item.Image" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>@item.Title</h5>
+                    <p>@item.Description</p>
+                </div>
+            </div>
+        }
+
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+
+</div>
+
+<style>
+    /* Slider stilini burada belirtin */
+
+    #carouselExampleCaptions {
+        max-width: 1200px; /* Slider'ın maksimum genişliğini belirtin */
+        margin: auto; /* Slider'ı ortalamak için */
+    }
+
+    .carousel-item img {
+        max-height: 650px; /* Resimlerin maksimum yüksekliğini belirtin */
+        width: auto; /* Resimlerin otomatik genişliğini ayarlayın */
+        margin: auto; /* Resimleri ortalamak için */
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 5%; /* Ok düğmelerinin genişliği */
+        color: #fff; /* Ok düğmelerinin rengi */
+        background-color: rgba(0, 0, 0, 0.5); /* Ok düğmelerinin arka plan rengi ve opaklığı */
+        border-radius: 25px; /* Ok düğmelerinin köşelerinin yuvarlatılması */
+    }
+
+        .carousel-control-prev:hover,
+        .carousel-control-next:hover {
+            background-color: rgba(0, 0, 0, 0.8); /* Fare üzerine gelindiğinde ok düğmelerinin arka plan rengi ve opaklığını değiştirin */
+        }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        width: 30px; /* Ok ikonlarının genişliği */
+        height: 30px; /* Ok ikonlarının yüksekliği */
+        background-size: 100%; /* Ok ikonlarının boyutunu ayarlayın */
+    }
+
+    .carousel-caption {
+        background-color: rgba(0, 0, 0, 0.7); /* Başlık ve açıklama arka plan rengi ve opaklığı */
+        border-radius: 10px; /* Başlık ve açıklama kutularının köşelerinin yuvarlatılması */
+    }
+
+        .carousel-caption h5 {
+            color: #fff; /* Başlık metin rengi */
+        }
+
+        .carousel-caption p {
+            color: #fff; /* Açıklama metin rengi */
+        }
+</style>

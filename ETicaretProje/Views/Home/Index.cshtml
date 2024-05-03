@@ -1,0 +1,52 @@
+﻿@model HomePageViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+@await Html.PartialAsync("_PartialSlider", Model.Slides)
+
+<section class="shop_section layout_padding">
+    <div class="container">
+        <div class="heading_container heading_center">
+            <h2>
+                En Çok Satan Ürünlerimiz
+            </h2>
+        </div>
+        <div class="row">
+            @for (int i = 0; i < 15 && i < Model.Products.Count(); i++)  // Burada İlk 15 Ürünü Popüler olarak gösterdim
+            {
+                var item = Model.Products[i];
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="box">
+                        <a href="/Products/Detail/@item.Id">
+                            <div class="img-box">
+                                <img src="/Images/@item.Image" class="img-fluid product-image" />
+                            </div>
+                            <div class="detail-box">
+                                <h6>@item.Name</h6>
+                                <h6><span>@item.Price</span></h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="btn-box">
+            <a asp-controller="Products" asp-action="Index">
+                Tüm Ürünleri Görüntüle
+            </a>
+        </div>
+    </div>
+
+</section>
+
+<style>
+    /* Resmin üzerine gelindiğinde büyüme efekti */
+    .product-image {
+        transition: transform 0.3s ease;
+    }
+
+        .product-image:hover {
+            transform: scale(1.05);
+        }
+</style>

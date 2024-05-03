@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Product>
+
+<style>
+    .product-img {
+        width: 150%; /* Resimlerin genişliğini %100 olarak ayarlar */
+        height: 235px; /* Sabit bir yükseklik atar */
+</style>
+
+<div class="row">
+    @foreach (var product in Model.Where(x => x.IsActive))
+    {
+        <div class="col-md-3 mb-4">
+            <!-- 4 sütunlu düzen için col-md-3 kullanılır (12 sütunlu bootstrap grid sistemi) -->
+            <a href="/Products/Detail/@product.Id" class="text-decoration-none">
+                <div class="shadow rounded">
+                    <div class="card">
+                        <img src="/Images/@product.Image" alt="@product.Name" class="card-img-top product-img">
+                        <div class="card-body">
+                            <p class="card-text">@product.Name</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+</div>
