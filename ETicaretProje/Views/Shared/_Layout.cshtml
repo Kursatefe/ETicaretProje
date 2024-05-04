@@ -1,12 +1,10 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ETicaretProje</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ETicaretProje.styles.css" asp-append-version="true" />
     <link type="image/x-icon" rel="icon" href="/images/favicon.ico" />
@@ -16,15 +14,19 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap JavaScript -->
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    
-
-
-
     @await RenderSectionAsync("style", required: false)
+    <style>
+        #scrollTopButton {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+        }
+    </style>
 </head>
 @await Html.PartialAsync("_PartialHeader")
 <body>
-
     <div class="container">
         <main role="main" class="pb-3">
             @Html.Raw(TempData["Mesaj"])
@@ -32,13 +34,33 @@
         </main>
     </div>
     @await Html.PartialAsync("_PartialFooter")
+    <button onclick="scrollToTop()" id="scrollTopButton" title="Go to top">
+        <i class="bi bi-arrow-up-circle"></i>
+    </button>
     <link href="~/home/css/bootstrap.css" rel="stylesheet" />
     <link href="~/home/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/home/css/responsive.css" rel="stylesheet" />
     <link href="~/home/css/style.css" rel="stylesheet" />
-    
-
-
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        window.onscroll = function () {
+            scrollFunction()
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("scrollTopButton").style.display = "block";
+            } else {
+                document.getElementById("scrollTopButton").style.display = "none";
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
 </body>
 </html>
